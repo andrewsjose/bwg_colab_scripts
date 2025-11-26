@@ -45,7 +45,8 @@ senha_portal = "Kalisba987"
 # ============================================================
 def iniciar_driver_colab():
     chrome_options = Options()
-    chrome_options.binary_location = "/opt/chrome/chrome"
+    chrome_options.binary_location = "/usr/bin/chromium-browser"
+
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
@@ -58,9 +59,12 @@ def iniciar_driver_colab():
     chrome_options.add_argument("--disable-notifications")
     chrome_options.add_argument("--log-level=3")
 
-    service = Service("/usr/local/bin/chromedriver")
+    # Chromedriver nativo do Colab
+    service = Service("/usr/bin/chromedriver")
+
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
+
 
 
 # ============================================================

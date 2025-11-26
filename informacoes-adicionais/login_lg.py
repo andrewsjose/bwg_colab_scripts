@@ -47,23 +47,31 @@ def iniciar_driver_colab():
     chrome_options = Options()
     chrome_options.binary_location = "/usr/bin/chromium-browser"
 
+    # Configurações obrigatórias do Colab
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-infobars")
+    chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("--ignore-certificate-errors")
-    chrome_options.add_argument("--allow-running-insecure-content")
+    chrome_options.add_argument("--disable-software-rasterizer")
+    chrome_options.add_argument("--disable-notifications")
+    chrome_options.add_argument("--single-process")
+    chrome_options.add_argument("--no-zygote")
     chrome_options.add_argument("--log-level=3")
 
-    # O chromedriver nativo do Colab está AQUI
+    # ESTE é o chromedriver correto
     service = Service("/usr/bin/chromedriver")
 
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = webdriver.Chrome(
+        service=service,
+        options=chrome_options
+    )
 
     return driver
+
 
 
 
